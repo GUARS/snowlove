@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.container {
+				width: 200px;
+				height: 200px;
+				position: relative;
+				left: 40px;
+				right: 200px;
+				/*background: gray;*/
+				transform-style: preserve-3d;
+				/*perspective-origin: 500px -200px;*/
+				-webkit-perspective: 1000px;
+				-webkit-transform: translateZ(0);
+			}
+			
+			#cube {
+				
+				/*position: absolute;*/
+				top: -80px;
+				left: -40px;
+				
+			}
+			
+			#cube figure {
+				
+
+				
+				font-size: 5em;
+				width: 198px;
+				height: 198px;
+				border: 1px solid black;
+				text-align: center;
+				
+				
+			}
+			
+			.front {
+				position: absolute;
+				background: red;
+			
+				transform:  translateY(-100px) translateZ(100px)  rotateX(90deg);
+			}
+			
+			.back {
+				/*position: absolute;*/
+				position: absolute;
+				background: green;
+				transform: translateX(100px) translateZ(100px) rotateY(90deg);
+			}
+			
+			.top {
+				position: absolute;
+				background: blue;
+				transform: rotateY(180deg);
+			}
+			
+			.bottom {
+				position: absolute;
+				background: purple;
+				transform: translateZ(100px) translateX(-100px) rotateY(-90deg);
+			}
+			
+			.left {
+				position: absolute;
+				transform: translateZ(200px);
+				background: yellow;
+			}
+			
+			.right {
+				background: orange;
+				transform: translateY(180px) translateZ(100px)rotateX(-90deg);
+			}
+			.container{
+				animation: a 10s infinite linear;
+			}
+			@keyframes a{
+				from{transform: rotateZ(0) rotateY(0) rotateX(0);}
+				to{transform: rotateZ(360deg) rotateY(360deg) rotateX(360deg);}
+			}
+		</style>
+	</head>
+
+	<body>
+		<section class="container">
+			<div id="cube">
+				<figure class="front">1</figure>
+				<figure class="back">2</figure>
+				<figure class="top">3</figure>
+				<figure class="bottom">4</figure>
+				<figure class="left">5</figure>
+				<figure class="right">6</figure>
+			</div>
+		</section>
+	</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Demo</title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				background: #000000;
+			}
+			
+			#canvas {
+				/*background: greenyellow;*/
+				/*margin: 100px auto;*/
+				display: block;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="canvas" width="500px" height="500px">
+	你的浏览器不支持，请更新或更换浏览器！
+</canvas>
+		<script type="text/javascript">
+			var can = document.getElementById('canvas');
+			var cxt = can.getContext('2d');
+			var snowNum = 100;
+			var w = window.innerWidth;
+			var h = window.innerHeight;
+			var arr = [];
+			cxt.width = w;
+			cxt.height = h;
+			for (var i = 0; i < snowNum; i++) {
+				arr.push({
+					x: Math.random() * w,
+					y: Math.random() * h,
+					r: Math.random() * 3 + 1 //加1是为了防止半径出现0；
+				});
+			}
+
+			function drawsnow() {
+				cxt.clearRect(0, 0, w, h);
+				cxt.beginPath();
+				cxt.fillStyle = randomColor();
+				cxt.shadowColor = "white";
+				cxt.shadowBlur = 15;
+				cxt.shadowOffsetX = 2;
+				cxt.shadowOffsetY = 3;
+				for (var i = 0; i < snowNum; i++) {
+					var p = arr[i];
+					cxt.moveTo(p.x, p.y);
+					cxt.arc(p.x, p.y, p.r, 0, 360, false);
+				}
+				cxt.fill();
+				cxt.closePath();
+				snowDown();
+			}
+
+			function snowDown() {
+				for (var i = 0; i < snowNum; i++) {
+					var p = arr[i];
+
+						if (Math.random() < 0.5) {
+							p.x -= (Math.random() *0.6 + 0.1);
+						} else {
+							p.x += (Math.random()*0.6 + 0.1);
+						}
+					
+					p.y += (Math.random()+0.8);
+					if ((p.x) > w) {
+						p.x = 0
+					}else if(p.x<0){
+						p.x=w;
+					}
+					if ((p.y - 10) > h) {
+						p.y = 0;
+					}
+				}
+			}
+			setInterval(drawsnow, 20);
+			//			drawsnow();
+			function randomColor(){
+				var r = Math.floor(Math.random()*255);
+				var g = Math.floor(Math.random()*255);
+				var b = Math.floor(Math.random()*255);
+				return "rgb("+ r+","+ g+","+b+")";
+			}
+		</script>
+	</body>
+
+</html>
